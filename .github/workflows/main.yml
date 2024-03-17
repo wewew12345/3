@@ -1,0 +1,22 @@
+name: My Workflow
+on: [push]
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Border0 action
+        uses: borderzero/gh-action@v2
+        with:
+          token: ${{ secrets.BORDER0_ADMIN_TOKEN }}
+          background-mode: true
+
+      - name: Your steps here
+        run: echo border0
+
+      - name: Clean-up for Border0
+        if: always()
+        uses: borderzero/gh-action@v2
+        with:
+          token: ${{ secrets.BORDER0_ADMIN_TOKEN }}
+          clean-up-mode: true
